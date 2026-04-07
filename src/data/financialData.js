@@ -1,20 +1,43 @@
 // Sample financial data for Insurance Financial Analytics Dashboard
 
-// Historical data for charts (12 months)
+// Net adjustment factors for Gross/Net toggle
+// Net = Gross after reinsurance cession (18% of premiums ceded, 15% of claims recovered)
+const NET_PREMIUM_FACTOR = 0.82;
+const NET_CLAIMS_FACTOR = 0.85;
+
+// Available regions for filtering
+export const regions = ['All Regions', 'Northeast', 'Southeast', 'Midwest', 'Southwest', 'West'];
+
+// Historical data for charts (12 months) — Gross figures
 export const monthlyData = [
-  { month: 'Jan 2024', propertyPremiums: 245000, propertyClaims: 89000, autoPremiums: 312000, autoClaims: 156000 },
-  { month: 'Feb 2024', propertyPremiums: 238000, propertyClaims: 92000, autoPremiums: 298000, autoClaims: 142000 },
-  { month: 'Mar 2024', propertyPremiums: 251000, propertyClaims: 105000, autoPremiums: 325000, autoClaims: 178000 },
-  { month: 'Apr 2024', propertyPremiums: 259000, propertyClaims: 87000, autoPremiums: 318000, autoClaims: 165000 },
-  { month: 'May 2024', propertyPremiums: 267000, propertyClaims: 118000, autoPremiums: 335000, autoClaims: 189000 },
-  { month: 'Jun 2024', propertyPremiums: 273000, propertyClaims: 95000, autoPremiums: 342000, autoClaims: 172000 },
-  { month: 'Jul 2024', propertyPremiums: 281000, propertyClaims: 101000, autoPremiums: 356000, autoClaims: 198000 },
-  { month: 'Aug 2024', propertyPremiums: 275000, propertyClaims: 112000, autoPremiums: 348000, autoClaims: 185000 },
-  { month: 'Sep 2024', propertyPremiums: 289000, propertyClaims: 98000, autoPremiums: 361000, autoClaims: 176000 },
-  { month: 'Oct 2024', propertyPremiums: 295000, propertyClaims: 125000, autoPremiums: 375000, autoClaims: 205000 },
-  { month: 'Nov 2024', propertyPremiums: 302000, propertyClaims: 108000, autoPremiums: 382000, autoClaims: 192000 },
-  { month: 'Dec 2024', propertyPremiums: 311000, propertyClaims: 134000, autoPremiums: 395000, autoClaims: 215000 },
+  { month: 'Jan', propertyPremiums: 245000, propertyClaims: 89000, autoPremiums: 312000, autoClaims: 156000 },
+  { month: 'Feb', propertyPremiums: 238000, propertyClaims: 92000, autoPremiums: 298000, autoClaims: 142000 },
+  { month: 'Mar', propertyPremiums: 251000, propertyClaims: 105000, autoPremiums: 325000, autoClaims: 178000 },
+  { month: 'Apr', propertyPremiums: 259000, propertyClaims: 87000, autoPremiums: 318000, autoClaims: 165000 },
+  { month: 'May', propertyPremiums: 267000, propertyClaims: 118000, autoPremiums: 335000, autoClaims: 189000 },
+  { month: 'Jun', propertyPremiums: 273000, propertyClaims: 95000, autoPremiums: 342000, autoClaims: 172000 },
+  { month: 'Jul', propertyPremiums: 281000, propertyClaims: 101000, autoPremiums: 356000, autoClaims: 198000 },
+  { month: 'Aug', propertyPremiums: 275000, propertyClaims: 112000, autoPremiums: 348000, autoClaims: 185000 },
+  { month: 'Sep', propertyPremiums: 289000, propertyClaims: 98000, autoPremiums: 361000, autoClaims: 176000 },
+  { month: 'Oct', propertyPremiums: 295000, propertyClaims: 125000, autoPremiums: 375000, autoClaims: 205000 },
+  { month: 'Nov', propertyPremiums: 302000, propertyClaims: 108000, autoPremiums: 382000, autoClaims: 192000 },
+  { month: 'Dec', propertyPremiums: 311000, propertyClaims: 134000, autoPremiums: 395000, autoClaims: 215000 },
 ];
+
+/**
+ * Returns monthly chart data adjusted for Gross or Net basis.
+ * Net = Gross after reinsurance (82% of premiums retained, 85% of claims retained).
+ */
+export const getMonthlyData = (isGross = true) => {
+  if (isGross) return monthlyData;
+  return monthlyData.map(month => ({
+    ...month,
+    propertyPremiums: Math.round(month.propertyPremiums * NET_PREMIUM_FACTOR),
+    propertyClaims: Math.round(month.propertyClaims * NET_CLAIMS_FACTOR),
+    autoPremiums: Math.round(month.autoPremiums * NET_PREMIUM_FACTOR),
+    autoClaims: Math.round(month.autoClaims * NET_CLAIMS_FACTOR),
+  }));
+};
 
 // Asset performance data for table
 export const assetData = [
@@ -170,9 +193,19 @@ export const assetData = [
   },
 ];
 
-// Calculate summary statistics
-export const calculateSummaryStats = (assets = assetData, chartData = monthlyData) => {
-  // Year-to-date totals from monthly data
+/**
+ * Returns assets filtered by region.
+ */
+export const getFilteredAssets = (region = 'All Regions') => {
+  if (region === 'All Regions') return assetData;
+  return assetData.filter(a => a.region === region);
+};
+
+/**
+ * Calculate summary statistics from any chart data array.
+ * Pass the result of getMonthlyData(isGross) to respect Gross/Net basis.
+ */
+export const calculateSummaryStats = (chartData = monthlyData) => {
   const ytdPropertyPremiums = chartData.reduce((sum, month) => sum + month.propertyPremiums, 0);
   const ytdPropertyClaims = chartData.reduce((sum, month) => sum + month.propertyClaims, 0);
   const ytdAutoPremiums = chartData.reduce((sum, month) => sum + month.autoPremiums, 0);
