@@ -160,7 +160,66 @@ export default function SignUpPage() {
   const renderStepContent = () => {
     switch (currentStepData?.key) {
       case 'personal':
-        return <div className="signup-step-blank" />;
+        return (
+          <Stack gap={6}>
+            <Heading className="signup-step-heading">Personal Information</Heading>
+            <p className="signup-step-description">
+              Let's start with some basic information about you.
+            </p>
+            <TextInput
+              id="firstName"
+              labelText="First Name"
+              placeholder="Enter your first name"
+              value={formData.firstName}
+              onChange={(e) => updateFormData('firstName', e.target.value)}
+              required
+            />
+            <TextInput
+              id="lastName"
+              labelText="Last Name"
+              placeholder="Enter your last name"
+              value={formData.lastName}
+              onChange={(e) => updateFormData('lastName', e.target.value)}
+              required
+            />
+            <TextInput
+              id="email"
+              labelText="Email Address"
+              placeholder="your.email@example.com"
+              type="email"
+              value={formData.email}
+              onChange={(e) => updateFormData('email', e.target.value)}
+              required
+            />
+            <TextInput
+              id="phone"
+              labelText="Phone Number"
+              placeholder="(555) 123-4567"
+              type="tel"
+              value={formData.phone}
+              onChange={(e) => updateFormData('phone', e.target.value)}
+              required
+            />
+            <DatePicker
+              datePickerType="single"
+              dateFormat="m/d/Y"
+              maxDate={new Date().toLocaleDateString('en-US')}
+              onChange={(dates) => {
+                if (dates && dates[0]) {
+                  const d = dates[0];
+                  updateFormData('dateOfBirth', `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`);
+                }
+              }}
+            >
+              <DatePickerInput
+                id="dateOfBirth"
+                labelText="Date of Birth"
+                placeholder="mm/dd/yyyy"
+                value={formData.dateOfBirth}
+              />
+            </DatePicker>
+          </Stack>
+        );
 
       case 'address':
         return (
