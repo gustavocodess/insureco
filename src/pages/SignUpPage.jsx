@@ -160,59 +160,7 @@ export default function SignUpPage() {
   const renderStepContent = () => {
     switch (currentStepData?.key) {
       case 'personal':
-        return (
-          <Stack gap={6}>
-            <Heading className="signup-step-heading">Personal Information</Heading>
-            <p className="signup-step-description">
-              Your basic info
-            </p>
-            <TextInput
-              id="firstName"
-              labelText="First Name"
-              placeholder="Enter your first name"
-              value={formData.firstName}
-              onChange={(e) => updateFormData('firstName', e.target.value)}
-              required
-            />
-            <TextInput
-              id="lastName"
-              labelText="Last Name"
-              placeholder="Enter your last name"
-              value={formData.lastName}
-              onChange={(e) => updateFormData('lastName', e.target.value)}
-              required
-            />
-            <TextInput
-              id="email"
-              labelText="Email Address"
-              type="email"
-              placeholder="your.email@example.com"
-              value={formData.email}
-              onChange={(e) => updateFormData('email', e.target.value)}
-              required
-            />
-            <TextInput
-              id="phone"
-              labelText="Phone Number"
-              type="tel"
-              placeholder="(555) 123-4567"
-              value={formData.phone}
-              onChange={(e) => updateFormData('phone', e.target.value)}
-              required
-            />
-            <DatePicker
-              datePickerType="single"
-              onChange={(dates) => updateFormData('dateOfBirth', dates?.[0] || '')}
-            >
-              <DatePickerInput
-                id="dateOfBirth"
-                labelText="Date of Birth"
-                placeholder="mm/dd/yyyy"
-                value={formData.dateOfBirth}
-              />
-            </DatePicker>
-          </Stack>
-        );
+        return <div className="signup-step-blank" />;
 
       case 'address':
         return (
