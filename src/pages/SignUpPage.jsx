@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import {
   Grid,
   Column,
-  Form,
   Stack,
   TextInput,
   Button,
@@ -628,7 +627,7 @@ export default function SignUpPage() {
           </ProgressIndicator>
         </Tile>
 
-        <Form className="signup-form" onSubmit={handleSubmit}>
+        <div className="signup-form">
           <Stack gap={7} className="signup-step-content">
             {renderStepContent()}
           </Stack>
@@ -658,7 +657,7 @@ export default function SignUpPage() {
               </Button>
             ) : (
               <Button
-                type="submit"
+                onClick={handleSubmit}
                 disabled={!isStepValid()}
                 renderIcon={Checkmark}
                 iconDescription="Submit"
@@ -667,7 +666,7 @@ export default function SignUpPage() {
               </Button>
             )}
           </Stack>
-        </Form>
+        </div>
       </Column>
     </Grid>
   );
