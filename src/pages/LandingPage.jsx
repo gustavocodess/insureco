@@ -76,8 +76,7 @@ export default function LandingPage() {
                 Protect Your Future with Confidence, today.
               </Heading>
               <p className="hero-tagline">
-                Comprehensive car and home insurance designed for the modern world. 
-                Get covered in minutes with InsureCo.
+                Comprehensive insurance.
               </p>
               <div className="hero-actions">
                 <Button
