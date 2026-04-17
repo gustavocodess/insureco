@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import {
   Grid,
   Column,
-  Form,
   Stack,
   TextInput,
   Button,
@@ -165,7 +164,7 @@ export default function SignUpPage() {
           <Stack gap={6}>
             <Heading className="signup-step-heading">Personal Information</Heading>
             <p className="signup-step-description">
-              Your basic info
+              Let's start with some basic information about you.
             </p>
             <TextInput
               id="firstName"
@@ -186,8 +185,8 @@ export default function SignUpPage() {
             <TextInput
               id="email"
               labelText="Email Address"
-              type="email"
               placeholder="your.email@example.com"
+              type="email"
               value={formData.email}
               onChange={(e) => updateFormData('email', e.target.value)}
               required
@@ -195,15 +194,22 @@ export default function SignUpPage() {
             <TextInput
               id="phone"
               labelText="Phone Number"
-              type="tel"
               placeholder="(555) 123-4567"
+              type="tel"
               value={formData.phone}
               onChange={(e) => updateFormData('phone', e.target.value)}
               required
             />
             <DatePicker
               datePickerType="single"
-              onChange={(dates) => updateFormData('dateOfBirth', dates?.[0] || '')}
+              dateFormat="m/d/Y"
+              maxDate={new Date().toLocaleDateString('en-US')}
+              onChange={(dates) => {
+                if (dates && dates[0]) {
+                  const d = dates[0];
+                  updateFormData('dateOfBirth', `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`);
+                }
+              }}
             >
               <DatePickerInput
                 id="dateOfBirth"
@@ -628,7 +634,7 @@ export default function SignUpPage() {
           </ProgressIndicator>
         </Tile>
 
-        <Form className="signup-form" onSubmit={handleSubmit}>
+        <div className="signup-form">
           <Stack gap={7} className="signup-step-content">
             {renderStepContent()}
           </Stack>
@@ -658,7 +664,7 @@ export default function SignUpPage() {
               </Button>
             ) : (
               <Button
-                type="submit"
+                onClick={handleSubmit}
                 disabled={!isStepValid()}
                 renderIcon={Checkmark}
                 iconDescription="Submit"
@@ -667,7 +673,7 @@ export default function SignUpPage() {
               </Button>
             )}
           </Stack>
-        </Form>
+        </div>
       </Column>
     </Grid>
   );
