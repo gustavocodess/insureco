@@ -638,6 +638,8 @@ export default function SignUpPage() {
         </Tile>
 
         <Form className="signup-form" onSubmit={handleSubmit}>
+          {renderStepContent()}
+
           <Stack gap={5} orientation="horizontal" className="signup-actions">
             {currentStep > 0 && (
               <Button
