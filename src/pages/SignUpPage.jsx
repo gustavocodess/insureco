@@ -34,6 +34,7 @@ export default function SignUpPage() {
     lastName: '',
     email: '',
     phone: '',
+    alternatePhone: '',
     dateOfBirth: '',
     
     // Step 2: Address
@@ -165,7 +166,7 @@ export default function SignUpPage() {
           <Stack gap={6}>
             <Heading className="signup-step-heading">Personal Information</Heading>
             <p className="signup-step-description">
-              Your basic info
+              Let's start with some basic information about you.
             </p>
             <TextInput
               id="firstName"
@@ -200,6 +201,14 @@ export default function SignUpPage() {
               value={formData.phone}
               onChange={(e) => updateFormData('phone', e.target.value)}
               required
+            />
+            <TextInput
+              id="alternatePhone"
+              labelText="Alternate Phone Number"
+              type="tel"
+              placeholder="(555) 123-4567"
+              value={formData.alternatePhone}
+              onChange={(e) => updateFormData('alternatePhone', e.target.value)}
             />
             <DatePicker
               datePickerType="single"
