@@ -65,7 +65,7 @@
   .filter-panel {
     position: absolute;
     top: calc(100% + 4px);
-    right: 0;
+    left: 0;
     display: flex;
     width: 579px;
     max-width: calc(100vw - 32px);
