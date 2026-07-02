@@ -113,6 +113,17 @@
 
     &.kpi-card-modern--primary {
       border-left: 4px solid #24a148;
+      background: $color-grey-100;
+
+      .kpi-label,
+      .kpi-breakdown {
+        color: var(--text-on-dark-bg);
+        opacity: 0.75;
+      }
+
+      .kpi-value {
+        color: var(--text-on-dark-bg);
+      }
     }
 
     &.kpi-card-modern--danger {
