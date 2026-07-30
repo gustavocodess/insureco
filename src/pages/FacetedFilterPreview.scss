@@ -1,0 +1,26 @@
+@use '../styles/tokens' as *;
+
+.faceted-filter-preview {
+  padding: var(--spacing-06) 0;
+
+  &-header {
+    margin-bottom: var(--spacing-06);
+  }
+
+  &-title {
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-03);
+  }
+
+  &-subtitle {
+    color: var(--text-secondary);
+  }
+
+  &-demo {
+    padding: var(--spacing-07) var(--spacing-06);
+  }
+
+  &-trigger {
+    max-width: 195px;
+  }
+}

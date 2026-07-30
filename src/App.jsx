@@ -9,6 +9,8 @@ import DashboardHome from "./pages/DashboardHome";
 import AboutPage from "./pages/AboutPage";
 import ThemePreviewPage from "./pages/ThemePreviewPage";
 import ProgressIndicatorPreview from "./pages/ProgressIndicatorPreview";
+import FacetedFilterPreview from "./pages/FacetedFilterPreview";
+import ComponentShowcasePage from "./pages/ComponentShowcasePage";
 import BusinessComingSoon from "./pages/business/BusinessComingSoon";
 import BusinessDashboard from "./pages/business/BusinessDashboard";
 import PropertiesPage from "./pages/business/PropertiesPage";
@@ -41,6 +43,8 @@ export default function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/theme-preview" element={<ThemePreviewPage />} />
         <Route path="/progress-preview" element={<ProgressIndicatorPreview />} />
+        <Route path="/faceted-filter-preview" element={<FacetedFilterPreview />} />
+        <Route path="/component-showcase" element={<ComponentShowcasePage />} />
 
         {/* Business Routes */}
         <Route path="/business" element={<Navigate to="/business/dashboard" replace />} />
