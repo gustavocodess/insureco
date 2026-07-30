@@ -1,0 +1,53 @@
+@use '../styles/tokens' as *;
+
+.component-showcase-page {
+  padding: var(--spacing-06) 0 var(--spacing-08);
+}
+
+.component-showcase-header {
+  margin-bottom: var(--spacing-06);
+}
+
+.component-showcase-title {
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-03);
+}
+
+.component-showcase-subtitle {
+  color: var(--text-secondary);
+}
+
+.showcase-section {
+  margin-bottom: var(--spacing-06);
+  padding: var(--spacing-06);
+}
+
+.showcase-section-title {
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-05);
+}
+
+.showcase-tooltip-row {
+  align-items: center;
+}
+
+.showcase-tooltip-trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-03);
+  padding: var(--spacing-03) var(--spacing-04);
+  border: 1px solid var(--border-subtle);
+  background: var(--background-primary);
+  color: var(--text-primary);
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--background-hover);
+  }
+
+  svg {
+    fill: currentColor;
+  }
+}
